@@ -1,0 +1,205 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Osmomotion Payouts September</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style id="css">
+/* Layout: summary strip (totals by person) above one sortable ledger; rows stack to cards on phones */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --ink:#18212e; --muted:#5d6b7e; --line:#dbe1ea;
+  --sky:#1f63c9; --sky-soft:#e3ecfa; --money:#17804a; --money-soft:#e2f3e9; --zero:#9aa5b4;
+  --callie:#1f63c9; --asst:#b0570f; --asst-soft:#fbeadb;
+  --f-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f141b; --surface:#161d27; --ink:#e7ecf3; --muted:#93a1b4; --line:#263142;
+  --sky:#6fa3f0; --sky-soft:#1a2a44; --money:#4cc182; --money-soft:#123324; --zero:#5f6b7b;
+  --callie:#6fa3f0; --asst:#eb9a55; --asst-soft:#3a2614; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f141b; --surface:#161d27; --ink:#e7ecf3; --muted:#93a1b4; --line:#263142;
+  --sky:#6fa3f0; --sky-soft:#1a2a44; --money:#4cc182; --money-soft:#123324; --zero:#5f6b7b;
+  --callie:#6fa3f0; --asst:#eb9a55; --asst-soft:#3a2614; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.45}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:16px;padding-block:28px 48px;display:grid;gap:24px}
+h1{font-family:var(--f-display);font-weight:700;font-size:2.4rem;letter-spacing:.01em;margin:0;text-wrap:balance;line-height:1.05}
+.sub{color:var(--muted);margin:6px 0 0;max-width:65ch}
+.eyebrow{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:4px;min-width:0}
+.stat .num{font-family:var(--f-display);font-weight:600;font-size:2.1rem;line-height:1;font-variant-numeric:tabular-nums}
+.stat .note{color:var(--muted);font-size:.85rem}
+.stat.total .num{color:var(--money)}
+.stat.callie .num{color:var(--callie)}
+.stat.asst .num{color:var(--asst)}
+.namefield{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.namefield input{font:inherit;font-size:.85rem;padding:3px 6px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);width:9em}
+.tiers{display:flex;flex-wrap:wrap;gap:6px}
+.tiers span{font-family:var(--f-mono);font-size:.75rem;padding:3px 8px;border-radius:99px;background:var(--sky-soft);color:var(--ink);font-variant-numeric:tabular-nums}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:inherit;font-size:.85rem;padding:5px 12px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip:focus-visible,.seg button:focus-visible,a:focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+.status{font-size:.85rem;color:var(--muted)}
+.tablebox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:820px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--surface);position:sticky;top:0;cursor:pointer;user-select:none;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--f-mono)}
+.vid a{color:var(--sky);font-weight:600;font-size:.9rem;text-decoration:none}
+.no{font-family:var(--f-display);font-weight:700;font-size:1.5rem;color:var(--ink)}
+.vid a:hover{text-decoration:underline}
+.cap{color:var(--muted);font-size:.82rem;max-width:34ch;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{font-family:var(--f-mono);font-size:.7rem;padding:2px 8px;border-radius:99px;border:1px solid var(--line);white-space:nowrap}
+.pill.asst{background:var(--asst-soft);border-color:transparent}
+.pill.feed{background:var(--sky-soft);border-color:transparent}
+.prize{font-family:var(--f-display);font-weight:600;font-size:1.25rem}
+.prize.zero{color:var(--zero)}
+.prize.paid{color:var(--money)}
+.tier{font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{font:inherit;font-size:.8rem;padding:5px 10px;border:none;background:transparent;color:var(--muted);cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"].c{background:var(--sky-soft);color:var(--callie);font-weight:600}
+.seg button[aria-pressed="true"].a{background:var(--asst-soft);color:var(--asst);font-weight:600}
+.seg[aria-disabled="true"] button{cursor:default}
+.foot{color:var(--muted);font-size:.82rem;max-width:75ch;display:grid;gap:4px}
+@media (max-width:640px){h1{font-size:2rem}}
+@media (prefers-reduced-motion:no-preference){.chip,.seg button{transition:background .15s,color .15s}}
+</style>
+</head><body>
+<div id="app" class="wrap"></div>
+<script type="application/json" id="state">{"assistantName":"Chelsea","maker":{"DdSzgPHKVlJ":"c","DdTW6JeBZqv":"c"}}</script>
+<script id="main">
+(function(){
+const SNAP="30 Sep 2026";
+const VIDEOS=[
+["DdSzgPHKVlJ","2026-09-15",714259,"Action","trial","first jump in Australia this morning!! this place is insaneeee",1],
+["DdTW6JeBZqv","2026-09-17",481449,"Action","feed","first jump in Australia did not disappoint",1],
+["DdiXpOhqtxO","2026-09-21",601945,"Action","trial","POV: you take your best friend on her first helicopter skydive",1],
+["DdiXbDUK7n2","2026-09-21",164586,"Action","trial","POV you take your best friend on her first heli skydive >>>",1],
+["DdiWOk6qVnR","2026-09-21",129874,"360","trial","above the clouds",1],
+["DdiVms3qDoA","2026-09-21",928369,"360","trial","this with your best friend >>> (21 Sep)",2],
+["Daf4jQIKgQY","2026-09-21",862999,"Action","feed","sunset loads over Rio>>>",2],
+["DdoKqPjqwRw","2026-09-23",39009,"360","trial","Friends who jump together stay together",2],
+["DdoL8UdqBWa","2026-09-23",23303,"360","trial","Up close and personal with the sky",2],
+["DdoVppYKiJL","2026-09-23",2237,"360","trial","☁️☁️",2],
+["Ddoic-UqiMO","2026-09-23",18008,"360","trial",";)",3],
+["DdqJVtpStny","2026-09-24",3658557,"Action","trial","sunset helicopter skydiving >>>",3],
+["DdrLuOnqjzc","2026-09-24",69050,"360","trial",":)",3],
+["Ddp-GObKHQi","2026-09-24",381673,"Action","trial","don’t look down",3],
+["DdrKo2LKLAh","2026-09-24",11400,"360","trial","☁️☁️☁️",3],
+["DdqsjNSKZDh","2026-09-24",8281,"360","trial","Consider it done",4],
+["DdrRJTiK5Sz","2026-09-24",2897,"Action + 360","trial","How is this real life!!",4],
+["Ddp6W4vKIM0","2026-09-24",217913,"Action","trial","raw clip of jumping 8,000ft off a helicopter with your best friend",4],
+["Ddp4bl5Ks8R","2026-09-24",13147,"Action","trial","don’t look down (second version)",4],
+["DdqWEtyB5th","2026-09-24",1011104,"360","trial","this with your best friend >>> (1M views)",4],
+["DduOAl3qKAn","2026-09-25",57205,"360","trial","New trickkkkk",5],
+["DduUr7wKIhs","2026-09-25",14649,"360","trial","How is this real life",5],
+["Ddt-uBcqD_Y","2026-09-25",46112,"Action","trial","Just don’t look down ;)",5],
+["DdwoZ4NqeAU","2026-09-26",110587,"360","trial","Raw footage of one of my favorite jumps",5]
+].map((r,i)=>({n:i+1,code:r[0],date:r[1],views:r[2],product:r[3],where:r[4],cap:r[5],form:r[6]}));
+const TIERS=[[2000000,7,800],[1000000,6,500],[500000,5,400],[100000,4,200],[50000,3,100],[10000,2,50],[3000,1,30]];
+const tierOf=v=>{for(const t of TIERS)if(v>=t[0])return{tier:t[1],prize:t[2]};return{tier:0,prize:0}};
+VIDEOS.forEach(v=>Object.assign(v,tierOf(v.views)));
+
+let state={assistantName:"Chelsea",maker:{}};
+try{state=Object.assign(state,JSON.parse(document.getElementById("state").textContent))}catch(e){}
+let filter="all",sortKey="n",sortDir=1,canSave=false,status="",artifact=null;
+
+const fmt=n=>n.toLocaleString("en-US");
+const usd=n=>"$"+n.toLocaleString("en-US",{maximumFractionDigits:2});
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const dateLabel=d=>new Date(d+"T12:00:00Z").toLocaleDateString("en-GB",{day:"numeric",month:"short",timeZone:"UTC"});
+
+function totals(){
+  const t={all:0,c:0,a:0,u:0,cn:0,an:0,un:0,paying:0};
+  VIDEOS.forEach(v=>{t.all+=v.prize;if(v.prize)t.paying++;const m=state.maker[v.code];
+    if(m==="c"){t.c+=v.prize;t.cn++}else if(m==="a"){t.a+=v.prize;t.an++}else{t.u+=v.prize;t.un++}});
+  return t;
+}
+function rows(){
+  let r=VIDEOS.slice();
+  if(filter!=="all")r=r.filter(v=>(state.maker[v.code]||"u")===filter);
+  r.sort((x,y)=>{const a=x[sortKey],b=y[sortKey];return(a<b?-1:a>b?1:0)*sortDir||(x.date<y.date?-1:1)});
+  return r;
+}
+function render(){
+  const t=totals(),name=esc(state.assistantName||"Assistant");
+  const th=(k,label,cls)=>`<th class="${cls||""}" data-sort="${k}" aria-sort="${sortKey===k?(sortDir>0?"ascending":"descending"):"none"}">${label}${sortKey===k?(sortDir>0?" ↑":" ↓"):""}</th>`;
+  document.getElementById("app").innerHTML=`
+  <header>
+    <div class="eyebrow">DJI UGC Creator Program · Zone A Instagram</div>
+    <h1>#osmomotion payouts, September 2026</h1>
+    <p class="sub">All ${VIDEOS.length} reels posted since 1 Sep with #osmomotion (2 main feed, ${VIDEOS.length-2} trial). Views from Instagram Insights on ${SNAP}. Text Callie the numbers of the reels you made.</p>
+  </header>
+  <section class="summary" aria-label="Totals">
+    <div class="stat total"><span class="eyebrow">Expected income</span><span class="num">${usd(t.all)}</span><span class="note">${t.paying} of ${VIDEOS.length} reels reach a tier (3K+ views)</span></div>
+    <div class="stat callie"><span class="eyebrow">Callie</span><span class="num">${usd(t.c)}</span><span class="note">${t.cn} videos</span></div>
+    <div class="stat asst"><div class="namefield"><span class="eyebrow">Made by</span><span class="eyebrow">${name}</span></div><span class="num">${usd(t.a)}</span><span class="note">${t.an} videos · Callie owes her half: <b>${usd(t.a/2)}</b></span></div>
+    <div class="stat"><span class="eyebrow">Not assigned yet</span><span class="num">${usd(t.u)}</span><span class="note">${t.un} videos</span></div>
+  </section>
+  <div class="tiers" aria-label="Prize tiers">${TIERS.slice().reverse().map(x=>`<span>T${x[1]} ${x[0]>=1000000?(x[0]/1000000)+"M":(x[0]/1000)+"K"}+ = ${usd(x[2])}</span>`).join("")}</div>
+  <div class="toolbar">
+    <div class="filters" role="group" aria-label="Filter">
+      ${[["all","All"],["c","Callie"],["a",name],["u","Unassigned"]].map(f=>`<button class="chip" data-filter="${f[0]}" aria-pressed="${filter===f[0]}">${f[1]}</button>`).join("")}
+    </div>
+    <span class="status" id="status">${esc(status)}</span>
+  </div>
+  <div class="tablebox"><table>
+    <thead><tr>${th("n","#","num")}${th("date","Posted")}${th("code","Video")}${th("where","Where")}${th("product","Camera")}${th("views","Views","num")}${th("tier","Tier")}${th("prize","Prize","num")}${th("form","Form")}<th>Made by</th></tr></thead>
+    <tbody>${rows().map(v=>{const m=state.maker[v.code]||"";return`<tr>
+      <td class="num"><span class="no">${v.n}</span></td>
+      <td>${dateLabel(v.date)}</td>
+      <td class="vid"><a href="https://www.instagram.com/callie.rounds/reel/${v.code}/" target="_blank" rel="noopener">Watch reel ${v.n} ↗</a>${v.cap?`<div class="cap" title="${esc(v.cap)}">${esc(v.cap)}</div>`:""}</td>
+      <td><span class="pill ${v.where==="feed"?"feed":""}">${v.where==="feed"?"Main feed":"Trial"}</span></td>
+      <td>${esc(v.product)}</td>
+      <td class="num">${fmt(v.views)}</td>
+      <td class="tier">${v.tier?"Tier "+v.tier:"Under 3K"}</td>
+      <td class="num"><span class="prize ${v.prize?"paid":"zero"}">${usd(v.prize)}</span></td>
+      <td class="tier">Form ${v.form}</td>
+      <td>${m==="c"?'<span class="pill feed">Callie</span>':m==="a"?`<span class="pill asst">${name}</span>`:'<span class="tier">Not marked yet</span>'}</td></tr>`}).join("")}</tbody>
+  </table></div>
+  <div class="foot">
+    <span>Tier rule: a reel counts in the higher tier when it lands exactly on a boundary (10K counts as Tier 2). Reels under 3K views earn nothing.</span>
+    <span>Views keep growing until DJI takes its own count, so the final prize can move up a tier.</span>
+  </div>`;
+}
+let saveTimer=null;
+function queueSave(){
+  if(!artifact){status="Saving is off in this view";render();return}
+  status="Saving…";setStatus();
+  clearTimeout(saveTimer);saveTimer=setTimeout(save,900);
+}
+function setStatus(){const s=document.getElementById("status");if(s)s.textContent=status}
+function docHtml(){
+  const css=document.getElementById("css").textContent;
+  const js=document.getElementById("main").textContent;
+  const fonts=document.querySelector('link[rel="stylesheet"]').getAttribute("href");
+  const json=JSON.stringify(state).replace(/</g,"\\u003c");
+  return '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,-apple-system,sans-serif;background:#fafafa}img{max-width:100%}[hidden]{display:none!important}</style></head><body>'
+    +'<title>Osmomotion Payouts September</title>\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="stylesheet" href="'+fonts+'">\n'
+    +'<style id="css">'+css+'</style>\n<div id="app" class="wrap"></div>\n'
+    +'<script type="application/json" id="state">'+json+'<\/script>\n<script id="main">'+js+'<\/script>'
+    +'</body></html>';
+}
+async function save(){
+  try{await artifact.publish(docHtml());status="Saved";}
+  catch(e){const c=e&&e.code;status=c==="conflict"?"Someone else saved first, reloading":(c==="not_granted"||c==="not_writer")?"View only, changes are not saved":"Could not save, try again";if(c==="not_granted"||c==="not_writer"){canSave=false;render()}}
+  setStatus();
+}
+document.addEventListener("click",e=>{
+  const f=e.target.closest("[data-filter]");if(f){filter=f.dataset.filter;render();return}
+  const s=e.target.closest("th[data-sort]");if(s){const k=s.dataset.sort;if(sortKey===k)sortDir*=-1;else{sortKey=k;sortDir=(k==="views"||k==="prize"||k==="tier")?-1:1}render();return}
+  const b=e.target.closest("button[data-code]");if(b&&canSave){const code=b.dataset.code,m=b.dataset.m;
+    if(state.maker[code]===m)delete state.maker[code];else state.maker[code]=m;render();queueSave()}
+});
+document.addEventListener("change",e=>{if(e.target.id==="asstname"&&canSave){state.assistantName=e.target.value.trim()||"Assistant";render();queueSave()}});
+render();
+
+})();
+</script>
+
+</body></html>
